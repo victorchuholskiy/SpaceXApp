@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.gmail.victorchuholskiy.spasexapp.R
 import com.gmail.victorchuholskiy.spasexapp.databinding.ActivityRocketsListBinding
+import com.gmail.victorchuholskiy.spasexapp.decorations.RocketsListDecoration
 import com.gmail.victorchuholskiy.spasexapp.ui.base.BaseActivity
 import javax.inject.Inject
 
@@ -25,14 +26,13 @@ class RocketsListActivity : BaseActivity<RocketsListViewModel, ActivityRocketsLi
 		fun getIntent(ctx: Context) = Intent(ctx, RocketsListActivity::class.java)
 	}
 
-	/* life */
-
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setSupportActionBar(binding.incToolbar?.toolbar)
+		setSupportActionBar(binding.incToolbar.toolbar)
 
 		adapter = RocketsListAdapter()
 		binding.rv.adapter = adapter
+		binding.rv.addItemDecoration(RocketsListDecoration())
 
 		viewModel.rocketsList.observe(this, Observer {
 			adapter.update(it)

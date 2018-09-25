@@ -7,6 +7,7 @@ import com.gmail.victorchuholskiy.spasexapp.usecases.loadDBRockets.LoadDBRockets
 import com.gmail.victorchuholskiy.spasexapp.usecases.updateRockets.UpdateRocketsUseCase
 import com.gmail.victorchuholskiy.spasexapp.utils.ViewModelProviderFactory
 import com.gmail.victorchuholskiy.spasexapp.utils.extensions.applySchedulers
+import io.reactivex.Observable
 
 class RocketsListViewModel(private val updateRocketUseCase: UpdateRocketsUseCase,
 						   private val getRocketsUseCase: LoadDBRocketsUseCase) : BaseViewModel() {
@@ -14,14 +15,18 @@ class RocketsListViewModel(private val updateRocketUseCase: UpdateRocketsUseCase
 	val rocketsList = MutableLiveData<List<Rocket>>()
 
 	init {
-		loadRocketsList()
+		updateRocketList()
 	}
 
-	private fun loadRocketsList() {
+	private fun updateRocketList() {
 		isLoading.value = true
 		disposables.add(
 				updateRocketUseCase.execute()
 						.applySchedulers()
+						.onErrorResumeNext{ throwable: Throwable ->
+							errorMessage.value = throwable.toString()
+							Observable.just(false)
+						}
 						.flatMap { getRocketsUseCase.execute() }
 						.subscribe(
 								{

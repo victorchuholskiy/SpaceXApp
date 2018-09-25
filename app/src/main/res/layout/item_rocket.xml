@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		xmlns:tools="http://schemas.android.com/tools">
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 	<data>
 		<variable
 			name="rocket"
 			type="com.gmail.victorchuholskiy.spasexapp.data.entities.db.Rocket" />
 	</data>
 
-	<android.support.constraint.ConstraintLayout
+	<android.support.v7.widget.CardView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal">
+		android:foreground="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		app:cardUseCompatPadding="true"
+		app:cardCornerRadius="8dp">
 
-		<TextView
-			android:id="@+id/textView"
-			android:layout_width="wrap_content"
+		<LinearLayout
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="8dp"
-			android:text="Hello"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.0"
-			app:layout_constraintStart_toEndOf="@+id/textView2"
-			app:layout_constraintTop_toTopOf="parent"
-			tools:layout_conversion_absoluteHeight="1dp"
-			tools:layout_conversion_absoluteWidth="1dp"/>
+			android:orientation="vertical"
+			android:padding="16dp">
 
-		<TextView
-			android:id="@+id/textView2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Hello"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintHorizontal_bias="0.11"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent"
-			tools:layout_conversion_absoluteHeight="1dp"
-			tools:layout_conversion_absoluteWidth="1dp"/>
-	</android.support.constraint.ConstraintLayout>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text='@{@string/name + ": " + rocket.rocketName}'/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text='@{@string/country + ": " + rocket.country}'
+				android:layout_marginTop="8dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text='@{@string/engines_count + ": " + rocket.countOfEngines}'
+				android:layout_marginTop="8dp"/>
+		</LinearLayout>
+	</android.support.v7.widget.CardView>
 </layout>

@@ -1,7 +1,7 @@
 package com.gmail.victorchuholskiy.spasexapp.ui.rocketsList
 
-import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import android.content.Context
 import com.gmail.victorchuholskiy.spasexapp.di.scope.ActivityScope
 import com.gmail.victorchuholskiy.spasexapp.usecases.loadDBRockets.LoadDBRocketsUseCase
 import com.gmail.victorchuholskiy.spasexapp.usecases.loadDBRockets.LoadDBRocketsUseCaseImpl
