@@ -1,13 +1,22 @@
+buildscript {
+	repositories {
+		maven { url "https://nexus.inside.cactussoft.biz/repository/maven-public/" }
+	}
+
+	dependencies {
+		classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.3'
+	}
+}
+
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 28
+	buildToolsVersion "28.0.2"
     defaultConfig {
         applicationId "com.gmail.victorchuholskiy.spasexapp"
         minSdkVersion 19
@@ -15,6 +24,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "MAIN_API_URL", "\"https://api.spacexdata.com/\""
     }
     buildTypes {
         release {
@@ -22,6 +33,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+	dataBinding {
+		enabled = true
+	}
 }
 
 dependencies {
@@ -38,7 +52,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     // Rx2
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.15'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     // Dagger2
@@ -61,15 +75,34 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    /* test */
+	// Lifecycle
+	implementation "android.arch.lifecycle:extensions:1.1.1"
+	kapt "android.arch.lifecycle:compiler:1.1.1"
+
+    // Tests
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.22.0'
     testImplementation 'android.arch.core:core-testing:1.1.1'
 
-    /* android test */
+    // Android tests
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
     androidTestImplementation "org.mockito:mockito-android:2.22.0"
+}
+
+dexcount {
+	format = "list"
+	includeClasses = false
+	includeClassCount = false
+	includeFieldCount = true
+	includeTotalMethodCount = false
+	orderByMethodCount = false
+	verbose = false
+	maxTreeDepth = Integer.MAX_VALUE
+	teamCityIntegration = false
+	teamCitySlug = null
+	runOnEachPackage = true
+	maxMethodCount = 64000
 }
