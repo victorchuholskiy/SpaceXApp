@@ -12,6 +12,10 @@ import com.gmail.victorchuholskiy.spasexapp.BR
 import com.gmail.victorchuholskiy.spasexapp.utils.extensions.toast
 import dagger.android.support.DaggerAppCompatActivity
 
+/**
+ * Created by victor.chukholskiy
+ * 25.09.2018.
+ */
 abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : DaggerAppCompatActivity() {
 
 	protected lateinit var viewModel: VM

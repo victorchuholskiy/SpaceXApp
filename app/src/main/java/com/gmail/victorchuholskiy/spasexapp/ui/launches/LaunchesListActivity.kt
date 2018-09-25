@@ -7,14 +7,12 @@ import android.content.Intent
 import android.os.Bundle
 import com.gmail.victorchuholskiy.spasexapp.R
 import com.gmail.victorchuholskiy.spasexapp.databinding.ActivityLaunchesBinding
-import com.gmail.victorchuholskiy.spasexapp.databinding.ActivityRocketsListBinding
-import com.gmail.victorchuholskiy.spasexapp.decorations.RocketsListDecoration
 import com.gmail.victorchuholskiy.spasexapp.ui.base.BaseActivity
 import javax.inject.Inject
 
 /**
- * Created by aleksey.stepanov
- * 8/9/18.
+ * Created by victor.chukholskiy
+ * 25.09.2018.
  */
 class LaunchesListActivity : BaseActivity<LaunchesListViewModel, ActivityLaunchesBinding>() {
 
@@ -47,6 +45,7 @@ class LaunchesListActivity : BaseActivity<LaunchesListViewModel, ActivityLaunche
 
 		adapter = LaunchesListAdapter()
 		binding.rv.adapter = adapter
+		binding.rv.isNestedScrollingEnabled = false
 
 		supportActionBar?.apply {
 			title = intent.extras!!.getString(ROCKET_NAME_PARAM)
@@ -55,6 +54,10 @@ class LaunchesListActivity : BaseActivity<LaunchesListViewModel, ActivityLaunche
 
 		viewModel.launchesList.observe(this, Observer {
 			adapter.update(it)
+		})
+
+		viewModel.details.observe(this, Observer {
+			binding.tvDetails.text = it
 		})
 	}
 

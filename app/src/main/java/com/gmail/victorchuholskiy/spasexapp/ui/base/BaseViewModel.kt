@@ -6,8 +6,8 @@ import com.gmail.victorchuholskiy.spasexapp.utils.SingleLiveEvent
 import io.reactivex.disposables.CompositeDisposable
 
 /**
- * Created by aleksey.stepanov
- * 8/9/18.
+ * Created by victor.chukholskiy
+ * 25.09.2018.
  */
 abstract class BaseViewModel : ViewModel() {
 

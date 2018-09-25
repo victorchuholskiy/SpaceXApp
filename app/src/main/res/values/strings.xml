@@ -5,6 +5,7 @@
 	<string name="name">Name</string>
 	<string name="country">Country</string>
 	<string name="engines_count">Engines count</string>
+	<string name="success">Success</string>
 
 	<string name="server_def_error">Failed to load data</string>
 </resources>

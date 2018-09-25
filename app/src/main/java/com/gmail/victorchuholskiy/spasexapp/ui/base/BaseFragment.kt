@@ -15,6 +15,10 @@ import com.gmail.victorchuholskiy.spasexapp.BR
 import com.gmail.victorchuholskiy.spasexapp.utils.extensions.toast
 import dagger.android.support.DaggerAppCompatDialogFragment
 
+/**
+ * Created by victor.chukholskiy
+ * 25.09.2018.
+ */
 abstract class BaseFragment<VM : BaseViewModel, B : ViewDataBinding> : DaggerAppCompatDialogFragment() {
 
 	protected lateinit var viewModel: VM

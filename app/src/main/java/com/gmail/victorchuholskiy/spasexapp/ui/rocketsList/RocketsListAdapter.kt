@@ -10,8 +10,8 @@ import com.gmail.victorchuholskiy.spasexapp.BR
 import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Rocket
 
 /**
- * Created by aleksey.stepanov
- * 8/9/18.
+ * Created by victor.chukholskiy
+ * 25.09.2018.
  */
 class RocketsListAdapter(private val listener: (Rocket) -> Unit) : RecyclerView.Adapter<RocketsListAdapter.VH>() {
 

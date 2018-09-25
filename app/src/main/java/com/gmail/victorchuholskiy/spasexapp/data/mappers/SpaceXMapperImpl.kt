@@ -5,10 +5,6 @@ import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Rocket
 import com.gmail.victorchuholskiy.spasexapp.data.entities.remote.response.LaunchResponse
 import com.gmail.victorchuholskiy.spasexapp.data.entities.remote.response.RocketResponse
 
-/**
- * Created by aleksey.stepanov
- * 4/23/18.
- */
 object SpaceXMapperImpl : SpaceXMapper {
 
 	override fun map(remote: RocketResponse): Rocket {
@@ -23,7 +19,7 @@ object SpaceXMapperImpl : SpaceXMapper {
 				remote.company,
 				remote.rocketId,
 				remote.rocketName,
-				remote.details,
+				remote.description,
 				remote.engines!!.number)
 	}
 

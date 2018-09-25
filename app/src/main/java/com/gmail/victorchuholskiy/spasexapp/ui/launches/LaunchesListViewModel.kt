@@ -1,6 +1,7 @@
 package com.gmail.victorchuholskiy.spasexapp.ui.launches
 
 import android.arch.lifecycle.MutableLiveData
+import android.os.Bundle
 import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Launch
 import com.gmail.victorchuholskiy.spasexapp.ui.base.BaseViewModel
 import com.gmail.victorchuholskiy.spasexapp.usecases.loadDBLaunches.LoadDBLaunchesUseCase
@@ -9,11 +10,16 @@ import com.gmail.victorchuholskiy.spasexapp.utils.ViewModelProviderFactory
 import com.gmail.victorchuholskiy.spasexapp.utils.extensions.applySchedulers
 import io.reactivex.Observable
 
-class LaunchesListViewModel(private val rocketId: String,
+/**
+ * Created by victor.chukholskiy
+ * 25.09.2018.
+ */
+class LaunchesListViewModel(private val extras: Bundle,
 							private val updateLaunchesUseCase: UpdateLaunchesUseCase,
 							private val getLaunchesUseCase: LoadDBLaunchesUseCase) : BaseViewModel() {
 
 	val launchesList = MutableLiveData<List<Launch>>()
+	val details = MutableLiveData<String>()
 
 	init {
 		updateLaunchesList()
@@ -21,8 +27,12 @@ class LaunchesListViewModel(private val rocketId: String,
 
 	private fun updateLaunchesList() {
 		isLoading.value = true
+
+		val rocketId = extras.getString(LaunchesListActivity.ROCKET_ID_PARAM, "")
 		updateLaunchesUseCase.setRocketId(rocketId)
 		getLaunchesUseCase.setRocketId(rocketId)
+
+		details.value = extras.getString(LaunchesListActivity.ROCKET_DESC_PARAM, "")
 
 		disposables.add(
 				updateLaunchesUseCase.execute()

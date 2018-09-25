@@ -5,7 +5,7 @@ import com.gmail.victorchuholskiy.spasexapp.repository.db.SpaceXDataBase
 import dagger.android.DaggerApplication
 
 /**
- * Created by user
+ * Created by victor.chuholskiy
  * 25.09.2018.
  */
 class App : DaggerApplication() {

@@ -9,6 +9,10 @@ import com.gmail.victorchuholskiy.spasexapp.utils.ViewModelProviderFactory
 import com.gmail.victorchuholskiy.spasexapp.utils.extensions.applySchedulers
 import io.reactivex.Observable
 
+/**
+ * Created by victor.chukholskiy
+ * 25.09.2018.
+ */
 class RocketsListViewModel(private val updateRocketUseCase: UpdateRocketsUseCase,
 						   private val getRocketsUseCase: LoadDBRocketsUseCase) : BaseViewModel() {
 

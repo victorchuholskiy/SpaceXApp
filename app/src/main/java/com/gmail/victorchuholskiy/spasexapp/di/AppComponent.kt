@@ -11,10 +11,6 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 
-/**
- * Created by aleksey.stepanov
- * 8/13/18.
- */
 @AppScope
 @Component(modules = [AndroidSupportInjectionModule::class, AppModule::class, ActivityModule::class, RetrofitModule::class, RepositoryModule::class])
 interface AppComponent : AndroidInjector<App> {

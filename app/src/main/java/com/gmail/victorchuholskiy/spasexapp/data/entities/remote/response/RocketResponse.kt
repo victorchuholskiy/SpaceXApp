@@ -3,7 +3,7 @@ package com.gmail.victorchuholskiy.spasexapp.data.entities.remote.response
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by user
+ * Created by victor.chukholskiy
  * 24.09.2018.
  */
 class RocketResponse {
@@ -41,8 +41,8 @@ class RocketResponse {
 	@SerializedName("engines")
 	var engines: Engine? = null
 
-	@SerializedName("details")
-	var details: String ?= null
+	@SerializedName("description")
+	var description: String ?= null
 
 	class Engine {
 		@SerializedName("number")

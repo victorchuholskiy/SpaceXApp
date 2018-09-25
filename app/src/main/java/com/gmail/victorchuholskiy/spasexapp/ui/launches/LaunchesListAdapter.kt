@@ -10,10 +10,13 @@ import com.gmail.victorchuholskiy.spasexapp.BR
 import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Launch
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_launch.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
- * Created by aleksey.stepanov
- * 8/9/18.
+ * Created by victor.chukholskiy
+ * 25.09.2018.
  */
 class LaunchesListAdapter : RecyclerView.Adapter<LaunchesListAdapter.VH>() {
 
@@ -47,6 +50,9 @@ class LaunchesListAdapter : RecyclerView.Adapter<LaunchesListAdapter.VH>() {
 		fun bind(launch: Launch) {
 			binding.setVariable(BR.launch, launch)
 			binding.executePendingBindings()
+
+			val dateFormat = SimpleDateFormat("yyyy-mm-dd hh:mm:ss", Locale.GERMAN)
+			binding.root.tv_date.text = dateFormat.format(Date(TimeUnit.SECONDS.toMillis(launch.launchDateUnix)))
 
 			Picasso.get()
 					.load(launch.url)

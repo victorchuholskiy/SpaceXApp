@@ -13,8 +13,8 @@ import com.gmail.victorchuholskiy.spasexapp.ui.launches.LaunchesListActivity
 import javax.inject.Inject
 
 /**
- * Created by aleksey.stepanov
- * 8/9/18.
+ * Created by victor.chukholskiy
+ * 25.09.2018.
  */
 class RocketsListActivity : BaseActivity<RocketsListViewModel, ActivityRocketsListBinding>() {
 
