@@ -1,8 +1,8 @@
-package com.gmail.victorchuholskiy.spasexapp.usecases.updateRocketsList
+package com.gmail.victorchuholskiy.spasexapp.usecases.updateRockets
 
-import io.reactivex.Single
+import com.gmail.victorchuholskiy.spasexapp.usecases.UseCase
+import io.reactivex.Observable
 
-interface LoadUserListUseCase {
-
-	fun loadUserList(): Single<List<UserRemote>>
+interface UpdateRocketsUseCase: UseCase<Boolean> {
+	override fun execute(): Observable<Boolean>
 }

@@ -1,12 +1,8 @@
-package com.drg.testmvvm.extension
+package com.gmail.victorchuholskiy.spasexapp.utils.extensions
 
-import com.drg.testmvvm.data.entity.remote.response.error.SimpleErrorResponse
-import com.drg.testmvvm.repository.api.error.RetrofitException
+import com.gmail.victorchuholskiy.spasexapp.data.entities.remote.response.SimpleErrorResponse
+import com.gmail.victorchuholskiy.spasexapp.repository.api.error.RetrofitException
 
-/**
- * Created by aleksey.stepanov
- * 5/7/18.
- */
 fun Throwable.processError(): String? = when (this) {
 	is RetrofitException -> when (kind) {
 		RetrofitException.Kind.HTTP -> try {
@@ -19,27 +15,3 @@ fun Throwable.processError(): String? = when (this) {
 	}
 	else -> "Not Retrofit error: ${toString()}"
 }
-//fun Throwable.processError(clazz: Class<out Any> = SimpleErrorResponse::class.java): Any = try {
-//	when (this) {
-//		is RetrofitException -> when(kind) {
-//			RetrofitException.Kind.HTTP -> "s"
-//			RetrofitException.Kind.NETWORK -> "No internet connection"
-//			RetrofitException.Kind.UNEXPECTED -> "UNEXPECTED error"
-////			getErrorBodyAs(clazz)?.msg
-//		}
-//		else -> "Not Retrofit error: ${toString()}"
-//	}
-//} catch (e: Exception) {
-//	e.toString()
-//}
-//fun <T> Throwable.processError(clazz: Class<T>): T? =
-//		when (this) {
-//			is RetrofitException -> getErrorBodyAs(clazz)
-//			else -> null
-//		}
-
-//fun  Throwable.processError(): String? =
-//		when (this) {
-//			is RetrofitException -> getErrorBodyAs(clazz)
-//			else -> null
-//		}

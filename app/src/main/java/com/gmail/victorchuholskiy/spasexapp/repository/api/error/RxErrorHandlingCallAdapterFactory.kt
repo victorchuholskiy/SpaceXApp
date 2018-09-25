@@ -1,4 +1,4 @@
-package com.gmail.victorchuholskiy.spasexapp.data.source.remote.error
+package com.gmail.victorchuholskiy.spasexapp.repository.api.error
 
 import io.reactivex.Completable
 import io.reactivex.Observable

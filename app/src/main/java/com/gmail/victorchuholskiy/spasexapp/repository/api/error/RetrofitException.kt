@@ -1,4 +1,4 @@
-package com.gmail.victorchuholskiy.spasexapp.data.source.remote.error
+package com.gmail.victorchuholskiy.spasexapp.repository.api.error
 
 import retrofit2.Response
 import retrofit2.Retrofit
