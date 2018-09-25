@@ -2,7 +2,7 @@ package com.gmail.victorchuholskiy.spasexapp.usecases.updateRockets
 
 import android.content.Context
 import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Rocket
-import com.gmail.victorchuholskiy.spasexapp.data.mappers.RocketMapperImpl
+import com.gmail.victorchuholskiy.spasexapp.data.mappers.SpaceXMapperImpl
 import com.gmail.victorchuholskiy.spasexapp.repository.db.SpaceXDataBase
 import com.gmail.victorchuholskiy.spasexapp.repository.notes.rockets.RocketsRemoteRepository
 import io.reactivex.Observable
@@ -20,7 +20,7 @@ class UpdateRocketsUseCaseImpl @Inject constructor(private val context: Context,
 						val db = SpaceXDataBase.getInstance(context)
 						val list = ArrayList<Rocket>()
 						for (response in it) {
-							list.add(RocketMapperImpl.map(response))
+							list.add(SpaceXMapperImpl.map(response))
 						}
 						db!!.productsDao().deleteProducts()
 						db.productsDao().insertAll(list)

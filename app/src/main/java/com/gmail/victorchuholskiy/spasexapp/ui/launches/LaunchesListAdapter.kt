@@ -1,4 +1,4 @@
-package com.gmail.victorchuholskiy.spasexapp.ui.rocketsList
+package com.gmail.victorchuholskiy.spasexapp.ui.launches
 
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -7,15 +7,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.gmail.victorchuholskiy.spasexapp.R
 import com.gmail.victorchuholskiy.spasexapp.BR
-import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Rocket
+import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Launch
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.item_launch.view.*
 
 /**
  * Created by aleksey.stepanov
  * 8/9/18.
  */
-class RocketsListAdapter(private val listener: (Rocket) -> Unit) : RecyclerView.Adapter<RocketsListAdapter.VH>() {
+class LaunchesListAdapter : RecyclerView.Adapter<LaunchesListAdapter.VH>() {
 
-	private val data = mutableListOf<Rocket>()
+	private val data = mutableListOf<Launch>()
 
 	/* inherited */
 
@@ -23,16 +25,16 @@ class RocketsListAdapter(private val listener: (Rocket) -> Unit) : RecyclerView.
 
 	override fun onCreateViewHolder(parent: ViewGroup,
 									viewType: Int): VH {
-		val binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_rocket, parent, false)
+		val binding: ViewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_launch, parent, false)
 		return VH(binding)
 	}
 
 	override fun onBindViewHolder(holder: VH,
-								  position: Int) = holder.bind(data[position], listener)
+								  position: Int) = holder.bind(data[position])
 
 	/* own methods */
 
-	fun update(newData: List<Rocket>?) {
+	fun update(newData: List<Launch>?) {
 		data.clear()
 		newData?.run { data.addAll(this) }
 		notifyDataSetChanged()
@@ -42,10 +44,15 @@ class RocketsListAdapter(private val listener: (Rocket) -> Unit) : RecyclerView.
 
 	class VH(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-		fun bind(rocket: Rocket, listener: (Rocket) -> Unit) {
-			binding.setVariable(BR.rocket, rocket)
+		fun bind(launch: Launch) {
+			binding.setVariable(BR.launch, launch)
 			binding.executePendingBindings()
-			binding.root.setOnClickListener { listener(rocket) }
+
+			Picasso.get()
+					.load(launch.url)
+					.error(R.drawable.ic_placeholder)
+					.placeholder(R.drawable.ic_placeholder)
+					.into(binding.root.iv)
 		}
 
 	}

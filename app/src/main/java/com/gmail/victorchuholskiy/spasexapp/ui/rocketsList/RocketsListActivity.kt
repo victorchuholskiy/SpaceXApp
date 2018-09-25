@@ -9,6 +9,7 @@ import com.gmail.victorchuholskiy.spasexapp.R
 import com.gmail.victorchuholskiy.spasexapp.databinding.ActivityRocketsListBinding
 import com.gmail.victorchuholskiy.spasexapp.decorations.RocketsListDecoration
 import com.gmail.victorchuholskiy.spasexapp.ui.base.BaseActivity
+import com.gmail.victorchuholskiy.spasexapp.ui.launches.LaunchesListActivity
 import javax.inject.Inject
 
 /**
@@ -30,7 +31,10 @@ class RocketsListActivity : BaseActivity<RocketsListViewModel, ActivityRocketsLi
 		super.onCreate(savedInstanceState)
 		setSupportActionBar(binding.incToolbar.toolbar)
 
-		adapter = RocketsListAdapter()
+		adapter = RocketsListAdapter(listener = {openDetails(
+				if (it.rocketId == null) "" else it.rocketId!!,
+				if (it.rocketName == null) "" else it.rocketName!!,
+				if (it.details == null) "" else it.details!!)})
 		binding.rv.adapter = adapter
 		binding.rv.addItemDecoration(RocketsListDecoration())
 
@@ -46,4 +50,10 @@ class RocketsListActivity : BaseActivity<RocketsListViewModel, ActivityRocketsLi
 	override fun getViewModelClass() = RocketsListViewModel::class.java
 
 	override fun getViewModelFactory() = vmFactory
+
+	private fun openDetails(rocketId: String,
+							rocketName: String,
+							rocketDesc: String) {
+		startActivity(LaunchesListActivity.getIntent(this, rocketId, rocketName, rocketDesc))
+	}
 }

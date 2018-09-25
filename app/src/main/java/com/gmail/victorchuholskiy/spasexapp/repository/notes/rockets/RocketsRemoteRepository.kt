@@ -6,6 +6,4 @@ import io.reactivex.Single
 interface RocketsRemoteRepository {
 
 	fun loadRocketsList(): Single<List<RocketResponse>>
-
-	fun loadRocketDetails(id: String): Single<RocketResponse>
 }

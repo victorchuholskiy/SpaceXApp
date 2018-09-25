@@ -41,6 +41,9 @@ class RocketResponse {
 	@SerializedName("engines")
 	var engines: Engine? = null
 
+	@SerializedName("details")
+	var details: String ?= null
+
 	class Engine {
 		@SerializedName("number")
 		var number: Int = 0

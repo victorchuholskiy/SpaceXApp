@@ -8,6 +8,4 @@ import javax.inject.Inject
 class RocketsRemoteRepositoryImpl @Inject constructor(private val mainApi: MainApi) : RocketsRemoteRepository {
 
 	override fun loadRocketsList(): Single<List<RocketResponse>> = mainApi.loadRocketsList()
-
-	override fun loadRocketDetails(id: String): Single<RocketResponse>  = mainApi.loadRocketDetails(id)
 }
