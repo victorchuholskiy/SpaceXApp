@@ -93,6 +93,9 @@ dependencies {
 
 	//Graphs
 	implementation 'com.github.AnyChart:AnyChart-Android:1.0.4'
+
+	// Prefs
+	implementation 'com.github.nalulabs.prefs-delegates:prefs-delegates:0.1'
 }
 
 dexcount {
