@@ -23,15 +23,12 @@ abstract class SpaceXDataBase : RoomDatabase() {
 	companion object {
 		private var INSTANCE: SpaceXDataBase? = null
 
-		fun getInstance(context: Context): SpaceXDataBase? {
-			if (INSTANCE == null) {
-				synchronized(SpaceXDataBase::class) {
-					INSTANCE = Room.databaseBuilder(context.applicationContext,
-							SpaceXDataBase::class.java, "products_database")
-							.build()
-				}
+		fun getInstance(context: Context): SpaceXDataBase {
+			synchronized(SpaceXDataBase::class) {
+				return INSTANCE ?: Room.databaseBuilder(context.applicationContext,
+						SpaceXDataBase::class.java, "products_database")
+						.build()
 			}
-			return INSTANCE
 		}
 
 		fun destroyInstance() {

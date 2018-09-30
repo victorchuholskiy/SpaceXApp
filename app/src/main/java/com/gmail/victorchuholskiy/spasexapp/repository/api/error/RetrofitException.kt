@@ -1,5 +1,7 @@
 package com.gmail.victorchuholskiy.spasexapp.repository.api.error
 
+import okhttp3.MediaType
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import java.io.IOException
@@ -10,7 +12,7 @@ class RetrofitException private constructor(
 		val url: String?,
 		val response: Response<*>?,
 		val kind: Kind,
-		val retrofit: Retrofit?
+		private val retrofit: Retrofit?
 ) : RuntimeException(message, exception) {
 
 	companion object {
@@ -35,7 +37,7 @@ class RetrofitException private constructor(
 	fun <T> getErrorBodyAs(type: Class<T>): T? {
 		if (retrofit != null && response != null && response.errorBody() != null) {
 			val converter = retrofit.responseBodyConverter<T>(type, arrayOfNulls(0))
-			return converter.convert(response.errorBody()!!)
+			return converter.convert(response.errorBody() ?: ResponseBody.create(MediaType.parse("text/plain"), "Error"))
 		}
 		return null
 	}

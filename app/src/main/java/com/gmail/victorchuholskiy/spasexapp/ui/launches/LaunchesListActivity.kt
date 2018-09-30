@@ -45,19 +45,22 @@ class LaunchesListActivity : BaseActivity<LaunchesListViewModel, ActivityLaunche
 
 		adapter = LaunchesListAdapter()
 		binding.rv.adapter = adapter
-		binding.rv.isNestedScrollingEnabled = false
 
 		supportActionBar?.apply {
-			title = intent.extras!!.getString(ROCKET_NAME_PARAM)
+			title = intent.extras?.getString(ROCKET_NAME_PARAM)
 			setDisplayHomeAsUpEnabled(true)
 		}
 
 		viewModel.launchesList.observe(this, Observer {
-			adapter.update(it)
+			adapter.updateLaunches(it)
+		})
+
+		viewModel.launchStatisticList.observe(this, Observer {
+			adapter.updateStatistic(it)
 		})
 
 		viewModel.details.observe(this, Observer {
-			binding.tvDetails.text = it
+			adapter.updateDetails(it?:"")
 		})
 	}
 

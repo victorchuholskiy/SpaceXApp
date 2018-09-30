@@ -16,8 +16,7 @@
 		android:theme="@style/AppTheme"
 		tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 		<activity
-			android:name=".ui.rocketsList.RocketsListActivity"
-			android:label="@string/rockets">
+			android:name=".ui.rocketsList.RocketsListActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 

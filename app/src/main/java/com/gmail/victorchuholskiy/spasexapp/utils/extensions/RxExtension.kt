@@ -13,5 +13,5 @@ fun <T : Any?> ObservableEmitter<T>.handleError(throwable: Throwable) {
 	}
 }
 
-fun <T> Observable<T>.applySchedulers(scheduler: Scheduler = Schedulers.io()) = subscribeOn(scheduler).observeOn(AndroidSchedulers.mainThread())!!
-fun <T> Single<T>.applySchedulers(scheduler: Scheduler = Schedulers.io()) = subscribeOn(scheduler).observeOn(AndroidSchedulers.mainThread())!!
+fun <T> Observable<T>.applySchedulers(scheduler: Scheduler = Schedulers.io()): Observable<T> = subscribeOn(scheduler).observeOn(AndroidSchedulers.mainThread())
+fun <T> Single<T>.applySchedulers(scheduler: Scheduler = Schedulers.io()): Single<T> = subscribeOn(scheduler).observeOn(AndroidSchedulers.mainThread())

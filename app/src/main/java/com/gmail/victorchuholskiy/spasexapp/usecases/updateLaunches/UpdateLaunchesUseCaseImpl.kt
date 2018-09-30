@@ -25,7 +25,7 @@ class UpdateLaunchesUseCaseImpl @Inject constructor(private val context: Context
 						for (response in it) {
 							list.add(SpaceXMapperImpl.map(response, rocketId))
 						}
-						db!!.launchesDao().deleteProducts()
+						db.launchesDao().deleteProducts()
 						db.launchesDao().insertAll(list)
 						true
 					} else {

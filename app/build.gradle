@@ -90,6 +90,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
     androidTestImplementation "org.mockito:mockito-android:2.22.0"
+
+	//Graphs
+	implementation 'com.github.AnyChart:AnyChart-Android:1.0.4'
+
+	// Prefs
+	implementation 'com.github.nalulabs.prefs-delegates:prefs-delegates:0.1'
 }
 
 dexcount {

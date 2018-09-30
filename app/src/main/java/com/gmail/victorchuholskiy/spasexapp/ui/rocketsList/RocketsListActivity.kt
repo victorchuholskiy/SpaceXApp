@@ -1,13 +1,16 @@
 package com.gmail.victorchuholskiy.spasexapp.ui.rocketsList
 
+import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import com.gmail.victorchuholskiy.spasexapp.R
 import com.gmail.victorchuholskiy.spasexapp.databinding.ActivityRocketsListBinding
 import com.gmail.victorchuholskiy.spasexapp.decorations.RocketsListDecoration
+import com.gmail.victorchuholskiy.spasexapp.repository.Prefs
 import com.gmail.victorchuholskiy.spasexapp.ui.base.BaseActivity
 import com.gmail.victorchuholskiy.spasexapp.ui.launches.LaunchesListActivity
 import javax.inject.Inject
@@ -31,16 +34,37 @@ class RocketsListActivity : BaseActivity<RocketsListViewModel, ActivityRocketsLi
 		super.onCreate(savedInstanceState)
 		setSupportActionBar(binding.incToolbar.toolbar)
 
-		adapter = RocketsListAdapter(listener = {openDetails(
-				if (it.rocketId == null) "" else it.rocketId!!,
-				if (it.rocketName == null) "" else it.rocketName!!,
-				if (it.details == null) "" else it.details!!)})
+		supportActionBar?.apply {
+			title = getString(R.string.rockets)
+		}
+
+		adapter = RocketsListAdapter(listener = {
+			openDetails(
+					it.rocketId ?: "",
+					it.rocketName ?: "",
+					it.details ?: ""
+			)
+		})
 		binding.rv.adapter = adapter
 		binding.rv.addItemDecoration(RocketsListDecoration())
 
 		viewModel.rocketsList.observe(this, Observer {
 			adapter.update(it)
 		})
+
+		if (Prefs(this).firstLaunch) {
+			AlertDialog.Builder(this)
+					.setTitle(R.string.welcome_title)
+					.setMessage(R.string.welcome_msg)
+					.setCancelable(false)
+					.setPositiveButton("OK")
+					{ dialogInterface, _ ->
+						Prefs(this).firstLaunch = false
+						dialogInterface.cancel()
+					}
+					.create()
+					.show()
+		}
 	}
 
 	/* inherited */

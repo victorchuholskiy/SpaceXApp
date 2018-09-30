@@ -20,18 +20,18 @@ object SpaceXMapperImpl : SpaceXMapper {
 				remote.rocketId,
 				remote.rocketName,
 				remote.description,
-				remote.engines!!.number)
+				remote.engines?.number?:0)
 	}
 
 	override fun map(remote: LaunchResponse, rocketId: String): Launch {
 		return Launch(
 				remote.flightNumber,
 				rocketId,
-				if (remote.missionName == null) "" else remote.missionName!!,
-				if (remote.launchYear.isNullOrEmpty()) 0 else Integer.valueOf(remote.launchYear!!),
+				remote.missionName?: "",
+				if (remote.launchYear.isNullOrEmpty()) 0 else Integer.valueOf(remote.launchYear),
 				remote.launchDateUnix,
 				remote.launchSuccess,
-				remote.links!!.missionPatch
+				remote.links?.missionPatch
 		)
 	}
 }

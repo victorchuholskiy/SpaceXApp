@@ -8,4 +8,9 @@
 	<string name="success">Success</string>
 
 	<string name="server_def_error">Failed to load data</string>
+
+	<string name="no_launches">This rocket has not yet launched</string>
+
+	<string name="welcome_title">Welcome!</string>
+	<string name="welcome_msg">Welcome to the SpaceX app!</string>
 </resources>

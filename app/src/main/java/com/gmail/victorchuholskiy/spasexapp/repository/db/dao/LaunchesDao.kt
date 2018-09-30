@@ -5,7 +5,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Launch
-import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Rocket
+import com.gmail.victorchuholskiy.spasexapp.data.entities.db.query.LaunchStatistic
 import io.reactivex.Flowable
 
 /**
@@ -29,4 +29,7 @@ interface LaunchesDao {
 
 	@Query("DELETE FROM launches")
 	fun deleteProducts()
+
+	@Query("SELECT launch_year, COUNT(*) as launch_count FROM launches WHERE rocket_id LIKE :rocketId GROUP BY launch_year ORDER BY launch_year")
+	fun getLaunchCounts(rocketId: String): Flowable<List<LaunchStatistic>>
 }
