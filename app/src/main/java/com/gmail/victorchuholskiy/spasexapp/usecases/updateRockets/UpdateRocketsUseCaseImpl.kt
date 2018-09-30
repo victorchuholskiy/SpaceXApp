@@ -22,7 +22,7 @@ class UpdateRocketsUseCaseImpl @Inject constructor(private val context: Context,
 						for (response in it) {
 							list.add(SpaceXMapperImpl.map(response))
 						}
-						db!!.productsDao().deleteProducts()
+						db.productsDao().deleteProducts()
 						db.productsDao().insertAll(list)
 						true
 					} else {

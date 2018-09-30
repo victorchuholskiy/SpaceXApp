@@ -29,12 +29,13 @@ class RocketsListActivity : BaseActivity<RocketsListViewModel, ActivityRocketsLi
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setSupportActionBar(binding.incToolbar.toolbar)
+		setSupportActionBar(binding.incToolbar?.toolbar)
 
 		adapter = RocketsListAdapter(listener = {openDetails(
-				if (it.rocketId == null) "" else it.rocketId!!,
-				if (it.rocketName == null) "" else it.rocketName!!,
-				if (it.details == null) "" else it.details!!)})
+				it.rocketId?:"",
+				it.rocketName?:"",
+				it.details?:""
+		)})
 		binding.rv.adapter = adapter
 		binding.rv.addItemDecoration(RocketsListDecoration())
 

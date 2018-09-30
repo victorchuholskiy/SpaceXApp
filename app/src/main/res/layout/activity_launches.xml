@@ -5,11 +5,11 @@
 
 	<data>
 
-		<import type="android.view.View" />
+		<import type="android.view.View"/>
 
 		<variable
 			name="viewModel"
-			type="com.gmail.victorchuholskiy.spasexapp.ui.launches.LaunchesListViewModel" />
+			type="com.gmail.victorchuholskiy.spasexapp.ui.launches.LaunchesListViewModel"/>
 	</data>
 
 	<LinearLayout
@@ -19,39 +19,21 @@
 
 		<include
 			android:id="@+id/inc_toolbar"
-			layout="@layout/inc_toolbar" />
+			layout="@layout/inc_toolbar"/>
 
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
-			<android.support.v4.widget.NestedScrollView
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent">
-
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:orientation="vertical">
-
-					<TextView
-						android:id="@+id/tv_details"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_horizontal"
-						android:layout_margin="16dp"/>
-
-					<android.support.v7.widget.RecyclerView
-						android:id="@+id/rv"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
-				</LinearLayout>
-			</android.support.v4.widget.NestedScrollView>
+				android:layout_height="match_parent"
+				app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
 			<include
 				layout="@layout/inc_progress_overlay"
-				app:viewModel="@{viewModel}" />
+				app:viewModel="@{viewModel}"/>
 		</FrameLayout>
 	</LinearLayout>
 </layout>

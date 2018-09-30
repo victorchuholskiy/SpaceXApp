@@ -9,7 +9,7 @@ import javax.inject.Inject
 class RocketsLocalRepositoryImpl @Inject constructor(private val context: Context) : RocketsLocalRepository {
 
 	override fun getRocketsList(): Flowable<List<Rocket>> {
-		return SpaceXDataBase.getInstance(context)!!
+		return SpaceXDataBase.getInstance(context)
 				.productsDao()
 				.getAll()
 	}

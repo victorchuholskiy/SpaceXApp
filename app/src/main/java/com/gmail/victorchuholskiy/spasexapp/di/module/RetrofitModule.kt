@@ -19,7 +19,7 @@ object RetrofitModule {
 	@JvmStatic
 	@Provides
 	@AppScope
-	fun provideMainApi(@Named("mainApi") retrofit: Retrofit) = retrofit.create<MainApi>(MainApi::class.java)!!
+	fun provideMainApi(@Named("mainApi") retrofit: Retrofit): MainApi = retrofit.create<MainApi>(MainApi::class.java)
 
 	@JvmStatic
 	@Provides
@@ -31,23 +31,23 @@ object RetrofitModule {
 	@JvmStatic
 	@Provides
 	@AppScope
-	fun provideOkHttpClient() = with(OkHttpClient.Builder()) {
+	fun provideOkHttpClient() : OkHttpClient = with(OkHttpClient.Builder()) {
 		interceptors().add(HttpLoggingInterceptor().apply {
 			level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else level
 
 		})
 		build()
-	}!!
+	}
 
 	@JvmStatic
 	private fun buildRetrofit(
 			okHttpClient: OkHttpClient,
 			gson: Gson,
-			url: String) =
+			url: String): Retrofit =
 			Retrofit.Builder()
 					.client(okHttpClient)
 					.baseUrl(url)
 					.addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
 					.addConverterFactory(GsonConverterFactory.create(gson))
-					.build()!!
+					.build()
 }

@@ -3,7 +3,9 @@ package com.gmail.victorchuholskiy.spasexapp.ui.launches
 import android.arch.lifecycle.MutableLiveData
 import android.os.Bundle
 import com.gmail.victorchuholskiy.spasexapp.data.entities.db.Launch
+import com.gmail.victorchuholskiy.spasexapp.data.entities.db.query.LaunchStatistic
 import com.gmail.victorchuholskiy.spasexapp.ui.base.BaseViewModel
+import com.gmail.victorchuholskiy.spasexapp.usecases.loadDBLaunchCounts.LoadDBLaunchCountUseCase
 import com.gmail.victorchuholskiy.spasexapp.usecases.loadDBLaunches.LoadDBLaunchesUseCase
 import com.gmail.victorchuholskiy.spasexapp.usecases.updateLaunches.UpdateLaunchesUseCase
 import com.gmail.victorchuholskiy.spasexapp.utils.ViewModelProviderFactory
@@ -16,9 +18,11 @@ import io.reactivex.Observable
  */
 class LaunchesListViewModel(private val extras: Bundle,
 							private val updateLaunchesUseCase: UpdateLaunchesUseCase,
-							private val getLaunchesUseCase: LoadDBLaunchesUseCase) : BaseViewModel() {
+							private val getLaunchesUseCase: LoadDBLaunchesUseCase,
+							private val getLaunchStatisticUseCase: LoadDBLaunchCountUseCase) : BaseViewModel() {
 
 	val launchesList = MutableLiveData<List<Launch>>()
+	val launchStatisticList = MutableLiveData<List<LaunchStatistic>>()
 	val details = MutableLiveData<String>()
 
 	init {
@@ -31,6 +35,7 @@ class LaunchesListViewModel(private val extras: Bundle,
 		val rocketId = extras.getString(LaunchesListActivity.ROCKET_ID_PARAM, "")
 		updateLaunchesUseCase.setRocketId(rocketId)
 		getLaunchesUseCase.setRocketId(rocketId)
+		getLaunchStatisticUseCase.setRocketId(rocketId)
 
 		details.value = extras.getString(LaunchesListActivity.ROCKET_DESC_PARAM, "")
 
@@ -41,7 +46,11 @@ class LaunchesListViewModel(private val extras: Bundle,
 							errorMessage.value = throwable.toString()
 							Observable.just(false)
 						}
-						.flatMap { getLaunchesUseCase.execute() }
+						.flatMap { getLaunchStatisticUseCase.execute() }
+						.flatMap {
+							launchStatisticList.value = it
+							getLaunchesUseCase.execute()
+						}
 						.subscribe(
 								{
 									isLoading.value = false
